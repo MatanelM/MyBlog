@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
+use App\Models\Post;
+
 class ConfirmablePasswordController extends Controller
 {
     /**
@@ -34,7 +36,7 @@ class ConfirmablePasswordController extends Controller
         }
 
         $request->session()->put('auth.password_confirmed_at', time());
-
-        return redirect()->intended(route('dashboard', absolute: false));
+	$posts = Post::with('user')->latest()->get(); // Fetch all posts with user data
+        return redirect()->intended(route('dashboard', absolute: false))->with(compact('posts'));
     }
 }

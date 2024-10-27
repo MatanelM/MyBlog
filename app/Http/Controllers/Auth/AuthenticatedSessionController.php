@@ -8,7 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-
+use App\Models\Post;
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -27,8 +27,8 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
-        return redirect()->intended(route('dashboard', absolute: false));
+	$posts = Post::with('user')->latest()->get(); // Fetch all posts with user data
+        return redirect()->intended(route('dashboard', absolute: false))->with(compact('posts'));
     }
 
     /**

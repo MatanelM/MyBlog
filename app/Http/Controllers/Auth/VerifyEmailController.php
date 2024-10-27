@@ -7,6 +7,8 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;
 
+use App\Models\Post;
+
 class VerifyEmailController extends Controller
 {
     /**
@@ -15,13 +17,14 @@ class VerifyEmailController extends Controller
     public function __invoke(EmailVerificationRequest $request): RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
+	    $posts = Post::with('user')->latest()->get();
+            return redirect()->intended(route('dashboard', absolute: false).'?verified=1')->with(compact('posts'));
         }
 
         if ($request->user()->markEmailAsVerified()) {
             event(new Verified($request->user()));
         }
-
-        return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
+	$posts = Post::with('user')->latest()->get();
+        return redirect()->intended(route('dashboard', absolute: false).'?verified=1')->with(compact('posts'));
     }
 }
