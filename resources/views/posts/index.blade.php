@@ -11,11 +11,9 @@
                 @foreach($posts as $post)
                     <div class="border-b border-gray-300 py-4">
                         <h3 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">{{ $post->title }}</h3>
-                        <p class="text-gray-700 dark:text-gray-300">{{ Str::limit($post->content, 150) }}</p>
+                        <p class="text-gray-700 dark:text-gray-300">{{ $post->content }}</p>
                         <div class="mt-4">
-                            <a href="{{ route('posts.show', $post) }}" class="text-blue-500 hover:underline">View</a>
-                            <a href="{{ route('posts.edit', $post) }}" class="text-green-500 hover:underline ml-4">Edit</a>
-                            <form action="{{ route('posts.destroy', $post) }}" method="POST" class="inline">
+			    <form action="{{ route('posts.destroy', $post->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-500 hover:underline ml-4">Delete</button>

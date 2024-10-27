@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class PostController extends Controller
 {
+
+    use AuthorizesRequests;
     /**
      * Display a listing of the posts.
      */
@@ -78,11 +81,15 @@ class PostController extends Controller
     /**
      * Remove the specified post from storage.
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        $this->authorize('delete', $post); // Ensures only the owner can delete
+        // Find the post by its ID
+        $post = Post::findOrFail($id);
+        
+        // Delete the post
         $post->delete();
 
+        // Redirect back to the dashboard or wherever you want
         return redirect()->route('posts.index')->with('success', 'Post deleted successfully.');
     }
 }
