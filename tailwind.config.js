@@ -16,8 +16,14 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+	        serif: ['Georgia', 'serif'],
             },
 	    colors: {
+		primary: '#1E40AF', // Blue
+	        secondary: '#FBBF24', // Yellow
+	        accent: '#F472B6', // Pink
+        	background: '#F9FAFB', // Light Gray
+	        text: '#374151', // Dark Gray
                 blue: {
                     100: '#ebf8ff',
                     200: '#bee3f8',
