@@ -91,7 +91,7 @@ crontab -e
 Add a new line to define the cron job. For example, to run the curl request every day at midnight, add:
 
 ```bash
-0 0 * * * curl -X GET "https://your-endpoint-url.com" > /dev/null 2>&1
+0 0 * * * curl -X GET "https://127.0.0.1:8080/external-posts/fetch" > /dev/null 2>&1
 ```
 
 ### Step 3: Save and Exit
