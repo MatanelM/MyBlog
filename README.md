@@ -31,7 +31,7 @@ A responsive blog application built with Laravel, featuring user authentication,
 
     ```bash
     git clone https://github.com/MatanelM/MyBlog
-    cd blog-application
+    cd MyBlog
     ```
 
 2. **Install dependencies:**
