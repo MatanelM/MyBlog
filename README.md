@@ -30,7 +30,7 @@ A responsive blog application built with Laravel, featuring user authentication,
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/your-username/blog-application.git
+    git clone [https://github.com/your-username/blog-application.git](https://github.com/MatanelM/MyBlog)
     cd blog-application
     ```
 
